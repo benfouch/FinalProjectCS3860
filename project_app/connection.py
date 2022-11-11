@@ -5,6 +5,7 @@ Term Project
 Due: 11-11-2022
 '''
 
+import re
 import bson
 from pymongo import MongoClient
 
@@ -115,9 +116,41 @@ class Connection:
     def get_nonzero_num_vids_per_cat(self):
         '''
         List the number of videos for each video category where the inventory (stock_count) is non-zero.
-
-
         '''
+        result = self.db['video_info'].aggregate([
+            {
+                '$redact': {
+                    '$cond': {
+                        'if': {
+                            '$gt': [
+                                '$stock_count', '0'
+                            ]
+                        }, 
+                        'then': '$$PRUNE', 
+                        'else': '$$KEEP'
+                    }
+                }
+            }, {
+                '$addFields': {
+                    'c': 1
+                }
+            }, {
+                '$group': {
+                    '_id': '$category', 
+                    'count': {
+                        '$sum': '$c'
+                    }
+                }
+            }
+        ])
+
+        res_arr = [r for r in result]
+
+        print('total results: ', len(res_arr))
+
+        for r in res_arr:
+            print(r)
+
         pass
 
     def get_actors_vid_cats(self):
