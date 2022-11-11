@@ -1,24 +1,28 @@
+'''
+Jenifer Madigan & Benjamin Fouch
+CS 3860
+Term Project 
+Due: 11-11-2022
+'''
+
 import bson
-from dotenv import load_dotenv
 from pymongo import MongoClient
-from collections import Counter
 
 
 class Connection:
     '''
-    Gives a basic connection object for querying and manipulating a given database
-    attrs:
-        db -> the name of the database
-    funtions:
-        get_db()
-        insert()
-        update()
-        find()
-        delete()
+    Gives a basic connection object for querying and manipulating a given database\n
+    attrs:\n
+        db -> the name of the database\n
+    funtions:\n
+        get_db()\n
+        insert()\n
+        update()\n
+        find()\n
+        delete()\n
     '''
 
     def __init__(self, url, database_name) -> None:
-        # mongodb+srv://fouchb:test@cluster0.y3lhg1a.mongodb.net/?retryWrites=true&w=majority
         client = MongoClient(url)
         self.db = client[database_name]
     
@@ -108,7 +112,7 @@ class Connection:
         '''
         return counter
     
-    def get_nonzero_num_vids_per_cat():
+    def get_nonzero_num_vids_per_cat(self):
         '''
         List the number of videos for each video category where the inventory (stock_count) is non-zero.
 
@@ -116,7 +120,7 @@ class Connection:
         '''
         pass
 
-    def get_actors_vid_cats():
+    def get_actors_vid_cats(self):
         '''
         For each actor, list the video categories that actor has appeared in.
 
@@ -124,7 +128,7 @@ class Connection:
         '''
         pass
 
-    def get_actor_in_dif_movie_cats():
+    def get_actor_in_dif_movie_cats(self):
         '''
         Which actors have appeared in movies in different video categories?
 
@@ -132,7 +136,7 @@ class Connection:
         '''
         pass
 
-    def get_actors_not_in_comedy():
+    def get_actors_not_in_comedy(self):
         '''
         Which actors have not appeared in a comedy?
 
@@ -140,7 +144,7 @@ class Connection:
         '''
         pass
     
-    def get_actor_in_comedy_adventure():
+    def get_actor_in_comedy_adventure(self):
         '''
         Which actors have appeared in both a comedy and an action adventure movie?
 

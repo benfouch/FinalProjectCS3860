@@ -1,0 +1,11 @@
+-----------------------------------------------------
+What type of query would you like to run? (select the number)
+(-1) All
+(3) List the number of videos for each video category
+(4) List the number of videos for each video category where the inventory (stock_count) is non-zero
+(5) For each actor, list the video categories that actor has appeared in
+(6) Which actors have appeared in movies in different video categories
+(7) Which actors have not appeared in a comedy
+(8) Which actors have appeared in both a comedy and an action adventure movie
+(9) Quit
+-----------------------------------------------------
