@@ -15,7 +15,7 @@ QUERY_PROMT = 'Insert your query to run:'
 
 
 def main():
-    db = Connectionection('mongodb+srv://fouchb:test@cluster0.y3lhg1a.mongodb.net/?retryWrites=true&w=majority', 'movies').get_db()
+    db = Connectionection('mongodb+srv://fouchb:test@cluster0.y3lhg1a.mongodb.net/?retryWrites=true&w=majority', 'test').get_db()
 
     selection = 'start'
 
@@ -26,7 +26,7 @@ def main():
     
 
     if selection in '1,2,3,4'.splt(','):
-        
+
 
    
 

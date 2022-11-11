@@ -1,6 +1,7 @@
 import bson
 from dotenv import load_dotenv
 from pymongo import MongoClient
+from collections import Counter
 
 
 class Connection:
@@ -63,7 +64,7 @@ class Connection:
         self.db.delete(obj)
 
 
-    def get_num_vids_per_cat():
+    def get_num_vids_per_cat(self):
         '''
         List the number of videos for each video category.
 
@@ -71,11 +72,45 @@ class Connection:
         FROM video_recordings
         GROUP BY category;
         '''
-        pass
+        col = self.db["video_info"]
+        
+        categories = self.db.video_info.distinct("category") # list of category names
+        
+        for c in categories:
+            query = { "category": c }
+            doc = col.find(query) # doc of all results
+
+            counter = 0
+            for x in doc: # count results
+                counter += 1
+                
+            print("Category ", c, " has ", counter, " videos.")
+
+
+        counter = 0
+        for x in doc:
+            counter += 1
+        print(counter)
+        '''
+        self.db.video_info.aggregate([
+            # Stage 1: Only find documents that have more than 1 like
+            {
+                $match: { likes: { $gt: 1 } }
+            },
+            # Stage 2: Group documents by category and sum each categories likes
+            {
+                $group: { _id: "$category", totalLikes: { $sum: "$likes" } }
+            }
+        ])
+        '''
+        '''
+        categories = self.db.col.distinct("category")
+        '''
+        return counter
     
     def get_nonzero_num_vids_per_cat():
         '''
-        List the number of videos for each video category where the inventory is non-zero.
+        List the number of videos for each video category where the inventory (stock_count) is non-zero.
 
 
         '''
